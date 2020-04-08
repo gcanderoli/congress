@@ -1,0 +1,32 @@
+<ng-container *ngIf="members.length > 0; else elseTemplate">
+  <h3>List of members:</h3>
+
+  <label for="search">Search: </label>
+  <input name="search" (keyup)="onKey($event)" />
+
+  <div class="row">
+    <div class="col-6 col-sm-3" *ngFor="let member of membersList">
+      <div class="card" (click)="selectMember(member)">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{ member.first_name }} {{ member.last_name }}</li>
+          <li class="list-group-item">{{ member.title }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li *ngFor="let page of pagination; let i = index" class="page-item" (click)="paginate(i, 10, currentList)">
+            <a class="page-link" [routerLink]="">{{ page + 1 }}</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</ng-container>
+<ng-template #elseTemplate>
+  <p>Loading...</p>
+</ng-template>
